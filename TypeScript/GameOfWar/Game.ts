@@ -23,8 +23,9 @@ class CardCollection {
 		}
 	}
 }
-enum Suit { Clubs, Diamonds, Hearts, Spades }
-enum Face { Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace }
+
+enum Suit { Clubs, Diamonds, Hearts, Spades, None }
+enum Face { Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace, Joker }
 
 /*****************************************************************************************************************/
 /* MAIN CLASSES */
@@ -62,6 +63,10 @@ class Deck extends CardCollection {
 				this.cards.push(new Card(i, j));
 			}
 		}
+
+		// Adding two jokers
+		this.cards.push(new Card(14, 4));
+		this.cards.push(new Card(14, 4));
 	}
 }
 
@@ -82,6 +87,7 @@ class Game {
 		while (this.player1.personalDeck.hasCards() === true && this.player2.personalDeck.hasCards() === true) {
 			var p1Card = this.player1.personalDeck.getNextCard();
 			var p2Card = this.player2.personalDeck.getNextCard();
+			// TODO: Implement tie functionality
 			if (p1Card.face >= p2Card.face) {
 				this.player1.personalDeck.addCard(p2Card);
 			} else {
@@ -98,7 +104,6 @@ class Game {
 	dealCardsFromDeck():void {
 		if (this.deck.hasCards() === true) {
 			var playerSwap:number = 1;
-			// TODO: Implement tie functionality
 			while (this.deck.hasCards() === true) {
 				if (playerSwap === 1) { //Give card to player 1
 					this.player1.personalDeck.addCard(this.deck.cards.pop());
