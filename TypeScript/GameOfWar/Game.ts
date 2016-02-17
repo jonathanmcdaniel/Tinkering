@@ -40,7 +40,7 @@ class Card {
 }
 
 class CardPile extends CardCollection {
-	addCard(card: Card) {
+	addCard(card: Card): void {
 		this.cards.push(card);
 	}
 }
@@ -70,7 +70,7 @@ class Game {
 	player1: Player = new Player("player 1");
 	player2: Player = new Player("player 2");
 
-	startGame():void {
+	startGame(): void {
 		this.generateDeck();
 		this.deck.shuffle();
 		this.dealCardsFromDeck();
